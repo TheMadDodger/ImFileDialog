@@ -47,7 +47,7 @@ namespace ifd {
 		}
 		inline float GetZoom() { return m_zoom; }
 
-		std::function<void*(uint8_t*, int, int, char)> CreateTexture; // char -> fmt -> { 0 = BGRA, 1 = RGBA }
+		std::function<void*(const std::string&, uint8_t*, int, int, char)> CreateTexture; // char -> fmt -> { 0 = BGRA, 1 = RGBA }
 		std::function<void(void*)> DeleteTexture;
 
 		class FileTreeNode {

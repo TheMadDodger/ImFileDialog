@@ -38,3 +38,7 @@ imgui.ini
 ImFileDialogExample
 CMakeCache.txt
 CMakeFiles
+Debug/
+ImFileDialog.vcxproj
+lib/
+Release/

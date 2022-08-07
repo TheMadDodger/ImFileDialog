@@ -504,9 +504,9 @@ namespace ifd {
 				m_calledOpenPopup = true;
 			}
 
-			if (ImGui::BeginPopupModal(m_currentTitle.c_str(), &m_isOpen, ImGuiWindowFlags_NoScrollbar)) {
+			if (ImGui::Begin(m_currentTitle.c_str(), &m_isOpen, ImGuiWindowFlags_NoScrollbar)) {
 				m_renderFileDialog();
-				ImGui::EndPopup();
+				ImGui::End();
 			}
 			else m_isOpen = false;
 		}
@@ -756,7 +756,7 @@ namespace ifd {
 		uint8_t* data = (uint8_t*)malloc(byteSize);
 		GetBitmapBits(iconInfo.hbmColor, byteSize, data);
 
-		m_icons[pathU8] = this->CreateTexture(data, ds.dsBm.bmWidth, ds.dsBm.bmHeight, 0);
+		m_icons[pathU8] = this->CreateTexture(path.string(), data, ds.dsBm.bmWidth, ds.dsBm.bmHeight, 0);
 
 		free(data);
 
@@ -792,7 +792,7 @@ namespace ifd {
 			uint8_t* data = (uint8_t*)ifd::GetDefaultFileIcon();
 			if (iconID == 0)
 				data = (uint8_t*)ifd::GetDefaultFolderIcon();
-			m_icons[pathU8] = this->CreateTexture(data, DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE, 0);
+			m_icons[pathU8] = this->CreateTexture(path.string(), data, DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE, 0);
 		}
 		// dark theme - invert the colors
 		else {
@@ -810,7 +810,7 @@ namespace ifd {
 					invData[index + 3] = data[index + 3];
 				}
 			}
-			m_icons[pathU8] = this->CreateTexture(invData, DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE, 0);
+			m_icons[pathU8] = this->CreateTexture(path.string(), invData, DEFAULT_ICON_SIZE, DEFAULT_ICON_SIZE, 0);
 
 			free(invData);
 		}
@@ -1165,7 +1165,7 @@ namespace ifd {
 			int fileId = 0;
 			for (auto& entry : m_content) {
 				if (entry.HasIconPreview && entry.IconPreviewData != nullptr) {
-					entry.IconPreview = this->CreateTexture(entry.IconPreviewData, entry.IconPreviewWidth, entry.IconPreviewHeight, 1);
+					entry.IconPreview = this->CreateTexture(entry.Path.string(), entry.IconPreviewData, entry.IconPreviewWidth, entry.IconPreviewHeight, 1);
 					stbi_image_free(entry.IconPreviewData);
 					entry.IconPreviewData = nullptr;
 				}
