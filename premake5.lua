@@ -1,11 +1,11 @@
-ImFileDialogDir = "../%{SubmodoleDirs.ImFileDialog}"
+ImFileDialogDir = "%{SubmodoleDirs.ImFileDialog}"
 
 project "ImFileDialog"
 	kind "StaticLib"
 	language "C++"
 
-	targetdir ("$(ProjectDir)/lib/%{outputdir}")
-	objdir ("$(ProjectDir)/%{outputdir}")
+	targetdir ("$(ProjectDir)/lib/%{outputDir}")
+	objdir ("$(ProjectDir)/%{outputDir}")
 
 	files
 	{
